@@ -37,25 +37,25 @@ public class ParkingLotController {
             String availabilityCheck = checkSlotAvailabilityUtility();
             if (!availabilityCheck.equals("")) return availabilityCheck;
 
-            int nearestSlotNumber = availableSlotsMinHeap.poll();
             String vehicleRegistrationId = command[1];
             int driverAge = Integer.parseInt(command[3]);
-            Vehicle vehicleObject = new Vehicle(vehicleRegistrationId, driverAge);
 
-            Slot slotToAllot = new Slot(nearestSlotNumber, vehicleObject, true);
-            if (slots[nearestSlotNumber] != null) {
-                return "Error: Slot number \"" + nearestSlotNumber + "\" already occupied!";
+            if (slots[availableSlotsMinHeap.peek()] != null) {
+                return "Error: Slot number \"" + availableSlotsMinHeap.peek() + "\" already occupied!";
             }
+            if (registrationId_Mapped_Slots.containsKey(vehicleRegistrationId)) {
+                return "Error: Car with vehicle registration number \"" + vehicleRegistrationId + "\" already present";
+            }
+
+            int nearestSlotNumber = availableSlotsMinHeap.poll();
+            Vehicle vehicleObject = new Vehicle(vehicleRegistrationId, driverAge);
+            Slot slotToAllot = new Slot(nearestSlotNumber, vehicleObject, true);
             slots[nearestSlotNumber] = slotToAllot;
             ArrayList<String> vehicleRegistrationIdListForAge = age_Mapped_RegistrationIdList.getOrDefault(driverAge, new ArrayList<>());
             vehicleRegistrationIdListForAge.add(vehicleRegistrationId);
             age_Mapped_RegistrationIdList.put(driverAge, vehicleRegistrationIdListForAge);
 
-            if (registrationId_Mapped_Slots.containsKey(vehicleRegistrationId)) {
-                return "Error: Car with vehicle registration number \"" + vehicleRegistrationId + "\" already present";
-            }
             registrationId_Mapped_Slots.put(vehicleRegistrationId, slotToAllot);
-
             return "Car with vehicle registration number \"" + vehicleRegistrationId + "\" has been parked at slot number " + nearestSlotNumber;
         }catch (Exception NumberFormatException){
             return "Error: NumberFormatException. Please correct the driver's age.";
@@ -65,6 +65,9 @@ public class ParkingLotController {
     private String checkOut(String[] command) {
         try {
             int slotNumber = Integer.parseInt(command[1]);
+            if(slots[slotNumber] == null){
+                return "Error: Slot number "+slotNumber+" already empty!";
+            }
             Slot checkOutSlot = slots[slotNumber];
             Vehicle checkOutVehicle = checkOutSlot.getParkedVehicle();
 
@@ -131,7 +134,12 @@ public class ParkingLotController {
                         break;
                     }
                     ArrayList<String> vehicleIDList = age_Mapped_RegistrationIdList.get(driverAge);
-                    response.append(vehicleIDList.toString());
+                    for (String vehicleId : vehicleIDList) {
+                        response.append(vehicleId).append(",");
+                    }
+                    if (response.charAt(response.length() - 1) == ',') {
+                        response.deleteCharAt(response.length() - 1);
+                    }
                 }catch (Exception NumberFormatException){
                     return "Error: NumberFormatException. Please correct the driver's age.";
                 }

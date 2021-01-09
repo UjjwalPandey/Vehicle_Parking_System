@@ -15,14 +15,14 @@ public class Main {
             while (myReader.hasNextLine()) {
                 String inputCommand = myReader.nextLine().trim();
 //                System.out.println("Input: "+inputCommand);
+                if(inputCommand.isEmpty()) continue;
                 String response = parkingLotController.processInput(inputCommand);
                 System.out.println(response);
 //                System.out.println("\n");
             }
             myReader.close();
         } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+            System.out.println("Input File Not Found.");
         }
     }
 }
