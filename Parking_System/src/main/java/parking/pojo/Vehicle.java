@@ -24,13 +24,5 @@ public class Vehicle {
     public void setDriverAge(int driverAge) {
         this.driverAge = driverAge;
     }
-
-    @Override
-    public String toString() {
-        return "Vehicle{" +
-                "registrationId='" + registrationId + '\'' +
-                ", driverAge=" + driverAge +
-                '}';
-    }
 }
 
