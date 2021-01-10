@@ -19,7 +19,7 @@ public class ParkingLotController {
      *
      * @param N - Number of slots within the Parking Lot.
      */
-    void initialize(int N){
+    private void initialize(int N){
         slots = new Slot[N+1];
         for(int i=1; i<=N; i++){
             availableSlotsMinHeap.add(i);
@@ -85,6 +85,9 @@ public class ParkingLotController {
      * @return Success/Error message for checkout process
      */
     private String checkOut(int slotNumber) {
+        if(slots == null || slots.length <= slotNumber || slotNumber < 0){
+            return "Error: Slot number "+slotNumber+" is out of range!";
+        }
         if(slots[slotNumber] == null){
             return "Error: Slot number "+slotNumber+" already empty!";
         }
@@ -113,40 +116,34 @@ public class ParkingLotController {
         String[] command = inputCommand.split(" ");
         StringBuilder response = new StringBuilder();
         if(command.length == 0) return response.toString();
-        switch (command[0]) {
-            case "Create_parking_lot" -> {
-                try {
+        String errorMessage = "";
+        try {
+            switch (command[0]) {
+                case "Create_parking_lot" -> {
+                    errorMessage = "Error: NumberFormatException. Please correct the number of slots";
                     int N = Integer.parseInt(command[1]);
+                    if(N < 1) return "Parking Lot must have at least 1 slot.";
                     initialize(N);
                     response.append("Created parking of ").append(N).append(" slots");
-                }catch (Exception NumberFormatException){
-                    return "Error: NumberFormatException. Please correct the number of slots";
                 }
-            }
-            case "Park" -> {
-                try {
+                case "Park" -> {
+                    errorMessage = "Error: NumberFormatException. Please correct the driver's age.";
                     String vehicleRegistrationId = command[1];
                     int driverAge = Integer.parseInt(command[3]);
                     response.append(allotTicket(vehicleRegistrationId, driverAge));
-                }catch (Exception NumberFormatException){
-                    response.append("Error: NumberFormatException. Please correct the driver's age.");
                 }
-            }
-            case "Leave" -> {
-                try {
+                case "Leave" -> {
+                    errorMessage =  "Error: NumberFormatException. Please correct the slot number";
                     int slotNumber = Integer.parseInt(command[1]);
                     response.append(checkOut(slotNumber));
-                }catch (Exception NumberFormatException){
-                    return "Error: NumberFormatException. Please correct the slot number";
                 }
-            }
-            // SEARCH Commands ahead
-            case "Slot_numbers_for_driver_of_age" -> {
-                try {
+                // SEARCH Commands ahead
+                case "Slot_numbers_for_driver_of_age" -> {
+                    errorMessage = "Error: NumberFormatException. Please correct the driver's age.";
                     int queryDriverAge = Integer.parseInt(command[1]);
                     if (!age_Mapped_RegistrationIdList.containsKey(queryDriverAge)) {
-                        response.append("No driver with age \"").append(queryDriverAge).append("\" not present");
-                        break;
+                        errorMessage = "No driver with age \""+queryDriverAge+"\" not present";
+                        return errorMessage;
                     }
                     ArrayList<String> vehicleIDForAge = age_Mapped_RegistrationIdList.get(queryDriverAge);
                     for (String vehicleId : vehicleIDForAge) {
@@ -155,36 +152,38 @@ public class ParkingLotController {
                     if (response.charAt(response.length() - 1) == ',') {
                         response.deleteCharAt(response.length() - 1);
                     }
-                }catch (Exception NumberFormatException){
-                    return "Error: NumberFormatException. Please correct the driver's age.";
+
                 }
-            }
-            case "Slot_number_for_car_with_number" -> {
-                String queryRegistrationId = command[1];
-                if (!registrationId_Mapped_Slots.containsKey(queryRegistrationId)) {
-                    response.append("Car with vehicle registration number \"").append(queryRegistrationId).append("\" not present");
-                    break;
+                case "Slot_number_for_car_with_number" -> {
+                    String queryRegistrationId = command[1];
+                    if (!registrationId_Mapped_Slots.containsKey(queryRegistrationId)) {
+                        errorMessage = "Warning: Car with vehicle registration number \""+queryRegistrationId+"\" not present";
+                        return errorMessage;
+                    }
+                    response.append(registrationId_Mapped_Slots.get(queryRegistrationId).getId());
                 }
-                response.append(registrationId_Mapped_Slots.get(queryRegistrationId).getId());
-            }
-            case "Vehicle_registration_number_for_driver_of_age" -> {
-                try {
+                case "Vehicle_registration_number_for_driver_of_age" -> {
+                    errorMessage = "Error: NumberFormatException. Please correct the driver's age.";
                     int driverAge = Integer.parseInt(command[1]);
                     if (!age_Mapped_RegistrationIdList.containsKey(driverAge)) {
-                        break;
-                    }
+                        errorMessage = "Warning: No vehicle parked by Driver of age "+driverAge;
+                        return errorMessage;
+                        }
                     ArrayList<String> vehicleIDList = age_Mapped_RegistrationIdList.get(driverAge);
                     for (String vehicleId : vehicleIDList) {
-                        response.append(vehicleId).append(",");
-                    }
+                            response.append(vehicleId).append(",");
+                        }
                     if (response.charAt(response.length() - 1) == ',') {
-                        response.deleteCharAt(response.length() - 1);
-                    }
-                }catch (Exception NumberFormatException){
-                    return "Error: NumberFormatException. Please correct the driver's age.";
+                            response.deleteCharAt(response.length() - 1);
+                        }
+                }
+                default -> {
+                    errorMessage = "Invalid command";
+                    return errorMessage;
                 }
             }
-            default -> response.append("Invalid command");
+        }catch (NumberFormatException e){
+            response.append(errorMessage);
         }
         return response.toString();
     }
