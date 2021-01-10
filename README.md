@@ -10,18 +10,18 @@
  - Also, Test cases covering corner cases can be [seen here](https://github.com/UjjwalPandey/Vehicle_Parking_System/blob/master/Parking_System/src/test/java/parking/controller/ParkingLotControllerTest.java). 
 
 ### Classes & Objects
- - **_Vehicle_**: Registration ID & Driver's age.
- - **_Slot_**: Slot Number & Parked vehicle object.
+ - `Vehicle:` Registration ID & Driver's age.
+ - `Slot:` Slot Number & Parked vehicle object.
 
 
 ### Data Structures Used:
- - ***MIN HEAP for storing the slot number:*** Helps in finding the nearest available slot from the entry gate.
- - ***HASHMAP to map (age, List [Vehicle Registration ID]):*** For an easy lookup of Registration ID linked with the driver of particular age. 
- - ***HASHMAP to map (Vehicle Registration ID, Slot object):*** For an easy lookup of the Slot for given Registration ID. 
- - ***Slots Array:*** To check if the slot is occupied or vacant in O(1) time. Also, helps in fetching the `nth` slot. 
+ - `MIN HEAP for storing the slot number:` Helps in finding the nearest available slot from the entry gate.
+ - `HASHMAP to map (age, List [Vehicle Registration ID]):` For an easy lookup of Registration ID linked with the driver of particular age. 
+ - `HASHMAP to map (Vehicle Registration ID, Slot object):` For an easy lookup of the Slot for given Registration ID. 
+ - `Slots Array:` To check if the slot is occupied or vacant in O(1) time. Also, helps in fetching the `nth` slot. 
 
 ### Controller File:
-This file has mainly 4 functions:
+This file has mainly 5 functions:
 1. `initialize:` Initializes Parking Lot.
 2. `allotTicket:` Module handling ticket/slot allocation.
 3. `checkOut:` Module handling the vehicle check-out process.
