@@ -5,6 +5,7 @@
 ### System Requirements and Project Setup:
  - Based on your OS, download & install the *Intellij* from [here](https://www.jetbrains.com/idea/download/#section=windows)
  - Clone the project from *GitHub*. Follow [these](https://www.jetbrains.com/help/idea/manage-projects-hosted-on-github.html#share-on-GitHub) steps.
+ - This project runs on _Openjdk-15_ which is open-source reference implementation of version 15 of the Java SE Platform. (Comes bundled with Intellij)
  - Try running the [main](https://github.com/UjjwalPandey/Vehicle_Parking_System/blob/master/Parking_System/src/main/java/parking/Main.java) function. If any Maven related issue pops up at your system then please [refer here](https://www.jetbrains.com/help/idea/convert-a-regular-project-into-a-maven-project.html#develop_with_maven) 
  - You can edit the [input file](https://github.com/UjjwalPandey/Vehicle_Parking_System/blob/master/Parking_System/src/main/resources/input.txt) at `src/main/resources/input.txt`
  - Also, Test cases covering corner cases can be [seen here](https://github.com/UjjwalPandey/Vehicle_Parking_System/blob/master/Parking_System/src/test/java/parking/controller/ParkingLotControllerTest.java). 
@@ -25,5 +26,5 @@ This file has mainly 5 functions:
 1. `initialize:` Initializes Parking Lot.
 2. `allotTicket:` Module handling ticket/slot allocation.
 3. `checkOut:` Module handling the vehicle check-out process.
-4. `processInput:` This function takes the command and  calls appropriate functions.
+4. `processParking:` This function takes the command and  calls appropriate functions.
 5. `checkSlotAvailabilityUtility:` Looks for if Parking Lot is initialized/prepared, and the slots are available.
