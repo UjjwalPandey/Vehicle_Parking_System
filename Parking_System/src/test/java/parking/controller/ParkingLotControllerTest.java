@@ -36,6 +36,7 @@ public class ParkingLotControllerTest {
 
     @Test
     public void testSlotNumbersForDriverOfAge(){
+        Assert.assertEquals( "Error: Please prepare the Parking Lot before working on slots", parkingLotController.processInput("Slot_numbers_for_driver_of_age 21"));
         parkingLotController.processInput("Create_parking_lot 6");
         parkingLotController.processInput("Park KA-01-HH-1234 driver_age 21");
         parkingLotController.processInput("Park MP-01-HH-1234 driver_age 21");
@@ -46,6 +47,7 @@ public class ParkingLotControllerTest {
 
     @Test
     public void testVehicleRegistrationNumberForDriverOfAge(){
+        Assert.assertEquals( "Error: Please prepare the Parking Lot before working on slots", parkingLotController.processInput("Vehicle_registration_number_for_driver_of_age 22"));
         parkingLotController.processInput("Create_parking_lot 6");
         parkingLotController.processInput("Park KA-01-HH-1234 driver_age 21");
         parkingLotController.processInput("Park MP-01-HH-1234 driver_age 21");
@@ -56,6 +58,7 @@ public class ParkingLotControllerTest {
 
     @Test
     public void testSlotNumberForCarWithNumber(){
+        Assert.assertEquals( "Error: Please prepare the Parking Lot before working on slots", parkingLotController.processInput("Slot_number_for_car_with_number UP-01-HH-1234"));
         parkingLotController.processInput("Create_parking_lot 6");
         parkingLotController.processInput("Park KA-01-HH-1234 driver_age 21");
         parkingLotController.processInput("Park PB-01-HH-1234 driver_age 21");
