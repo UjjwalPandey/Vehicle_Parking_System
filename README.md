@@ -16,7 +16,7 @@
 
 ### Data Structures Used:
 Here as there is no requirement of storing history, thus I opted to use Data Structures instead of Database. 
-Also, as the input format is such that there is almost _no such direct use of TICKET_ thus instead of making a sepearate Class, I have used a *_MAP which links Vehicle with the Slot._*
+Also, as the input format is such that there is almost <ins>_no such direct use of TICKET_</ins> thus instead of making a sepearate Class, I have used a **_MAP which links Vehicle with the Slot._**
 
  - `MIN HEAP for storing the slot number:` Helps in finding the nearest available slot from the entry gate.
  - `HASHMAP to map (age, List [Vehicle Registration ID]):` For an easy lookup of Registration ID linked with the driver of particular age. 
