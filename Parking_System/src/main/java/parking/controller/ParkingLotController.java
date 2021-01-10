@@ -19,7 +19,7 @@ public class ParkingLotController {
      *
      * @param N - Number of slots within the Parking Lot.
      */
-    private void initialize(int N){
+    public void initialize(int N){
         availableSlotsMinHeap = new PriorityQueue<>();
         age_Mapped_RegistrationIdList = new HashMap<>();
         registrationId_Mapped_Slots = new HashMap<>();
@@ -58,7 +58,7 @@ public class ParkingLotController {
      * @param driverAge - Age of driver
      * @return  Success/Failure message of ticket allocation.
      */
-    private String allotTicket(String vehicleRegistrationId, int driverAge) {
+    public String allotTicket(String vehicleRegistrationId, int driverAge) {
         String availabilityCheck = checkSlotAvailabilityUtility();
         if (!availabilityCheck.equals("")) return availabilityCheck;
 
@@ -89,7 +89,7 @@ public class ParkingLotController {
      * @param slotNumber - slot to be emptied
      * @return Success/Error message for checkout process
      */
-    private String checkOut(int slotNumber) {
+    public String checkOut(int slotNumber) {
         if(slots == null || slots.length <= slotNumber || slotNumber < 0){
             return "Error: Slot number "+slotNumber+" is out of range!";
         }
@@ -117,7 +117,7 @@ public class ParkingLotController {
      * @param inputCommand - Command phrase.
      * @return Response Output.
      */
-    public String processInput(String inputCommand){
+    public String processParking(String inputCommand){
         String[] command = inputCommand.split(" ");
         StringBuilder response = new StringBuilder();
         if(command.length == 0) return response.toString();

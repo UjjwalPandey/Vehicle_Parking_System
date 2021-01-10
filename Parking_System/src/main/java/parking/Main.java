@@ -16,7 +16,7 @@ public class Main {
                 String inputCommand = myReader.nextLine().trim();
 //                System.out.println("Input: "+inputCommand);
                 if(inputCommand.isEmpty()) continue;
-                String response = parkingLotController.processInput(inputCommand);
+                String response = parkingLotController.processParking(inputCommand);
                 System.out.println(response);
 //                System.out.println("\n");
             }
