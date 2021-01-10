@@ -20,3 +20,10 @@
  - ***HASHMAP to map (Vehicle Registration ID, Slot object):*** For an easy lookup of the Slot for given Registration ID. 
  - ***Slots Array:*** To check if the slot is occupied or vacant in O(1) time. Also, helps in fetching the `nth` slot. 
 
+### Controller File:
+This file has mainly 4 functions:
+1. `initialize:` Initializes Parking Lot.
+2. `allotTicket:` Module handling ticket/slot allocation.
+3. `checkOut:` Module handling the vehicle check-out process.
+4. `processInput:` This function takes the command and 
+5. `checkSlotAvailabilityUtility:` Looks for if Parking Lot is initialized/prepared and the slots are available.
