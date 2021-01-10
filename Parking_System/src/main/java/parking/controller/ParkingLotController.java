@@ -8,9 +8,9 @@ import java.util.HashMap;
 import java.util.PriorityQueue;
 
 public class ParkingLotController {
-    private final PriorityQueue<Integer> availableSlotsMinHeap = new PriorityQueue<>();
-    private final HashMap<Integer, ArrayList<String>> age_Mapped_RegistrationIdList = new HashMap<>();
-    private final HashMap<String, Slot> registrationId_Mapped_Slots = new HashMap<>();
+    private PriorityQueue<Integer> availableSlotsMinHeap;
+    private HashMap<Integer, ArrayList<String>> age_Mapped_RegistrationIdList;
+    private HashMap<String, Slot> registrationId_Mapped_Slots;
     private Slot[] slots;
 
     /**
@@ -20,6 +20,9 @@ public class ParkingLotController {
      * @param N - Number of slots within the Parking Lot.
      */
     private void initialize(int N){
+        availableSlotsMinHeap = new PriorityQueue<>();
+        age_Mapped_RegistrationIdList = new HashMap<>();
+        registrationId_Mapped_Slots = new HashMap<>();
         slots = new Slot[N+1];
         for(int i=1; i<=N; i++){
             availableSlotsMinHeap.add(i);
@@ -33,7 +36,9 @@ public class ParkingLotController {
      */
     private String checkSlotAvailabilityUtility(){
         String response = "";
-        if(availableSlotsMinHeap.size() == 0){
+        if(availableSlotsMinHeap == null){
+            response = "Error: Please prepare the Parking Lot before working on slots";
+        }else if(availableSlotsMinHeap.size() == 0){
             if(registrationId_Mapped_Slots.size() == 0){
                 response = "Error: Please prepare the Parking Lot before working on slots";
             }else{
@@ -141,7 +146,9 @@ public class ParkingLotController {
                 case "Slot_numbers_for_driver_of_age" -> {
                     errorMessage = "Error: NumberFormatException. Please correct the driver's age.";
                     int queryDriverAge = Integer.parseInt(command[1]);
-                    if (!age_Mapped_RegistrationIdList.containsKey(queryDriverAge)) {
+                    if (age_Mapped_RegistrationIdList == null) {
+                        return  "Error: Please prepare the Parking Lot before working on slots";
+                    }else if (!age_Mapped_RegistrationIdList.containsKey(queryDriverAge)) {
                         errorMessage = "No driver with age \""+queryDriverAge+"\" not present";
                         return errorMessage;
                     }
@@ -156,7 +163,9 @@ public class ParkingLotController {
                 }
                 case "Slot_number_for_car_with_number" -> {
                     String queryRegistrationId = command[1];
-                    if (!registrationId_Mapped_Slots.containsKey(queryRegistrationId)) {
+                    if (registrationId_Mapped_Slots == null) {
+                        return  "Error: Please prepare the Parking Lot before working on slots";
+                    }else if (!registrationId_Mapped_Slots.containsKey(queryRegistrationId)) {
                         errorMessage = "Warning: Car with vehicle registration number \""+queryRegistrationId+"\" not present";
                         return errorMessage;
                     }
@@ -165,7 +174,9 @@ public class ParkingLotController {
                 case "Vehicle_registration_number_for_driver_of_age" -> {
                     errorMessage = "Error: NumberFormatException. Please correct the driver's age.";
                     int driverAge = Integer.parseInt(command[1]);
-                    if (!age_Mapped_RegistrationIdList.containsKey(driverAge)) {
+                    if (age_Mapped_RegistrationIdList == null) {
+                        return  "Error: Please prepare the Parking Lot before working on slots";
+                    }else if (!age_Mapped_RegistrationIdList.containsKey(driverAge)) {
                         errorMessage = "Warning: No vehicle parked by Driver of age "+driverAge;
                         return errorMessage;
                         }
