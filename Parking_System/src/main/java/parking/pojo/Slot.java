@@ -4,9 +4,9 @@ public class Slot {
     int id;
     Vehicle parkedVehicle;
 
-    public Slot(int id, Vehicle parkedVehicleId) {
+    public Slot(int id, Vehicle parkedVehicle) {
         this.id = id;
-        this.parkedVehicle = parkedVehicleId;
+        this.parkedVehicle = parkedVehicle;
     }
 
     public int getId() {
