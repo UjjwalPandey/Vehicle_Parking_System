@@ -25,5 +25,5 @@ This file has mainly 5 functions:
 1. `initialize:` Initializes Parking Lot.
 2. `allotTicket:` Module handling ticket/slot allocation.
 3. `checkOut:` Module handling the vehicle check-out process.
-4. `processInput:` This function takes the command and 
-5. `checkSlotAvailabilityUtility:` Looks for if Parking Lot is initialized/prepared and the slots are available.
+4. `processInput:` This function takes the command and  calls appropriate functions.
+5. `checkSlotAvailabilityUtility:` Looks for if Parking Lot is initialized/prepared, and the slots are available.
