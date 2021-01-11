@@ -11,6 +11,25 @@ You can check the detailed expalination video on how to test the project through
  - You can edit the [input file](https://github.com/UjjwalPandey/Vehicle_Parking_System/blob/master/Parking_System/src/main/resources/input.txt) at `src/main/resources/input.txt`
  - Also, Test cases covering corner cases can be [seen here](https://github.com/UjjwalPandey/Vehicle_Parking_System/blob/master/Parking_System/src/test/java/parking/controller/ParkingLotControllerTest.java). 
 
+### Steps:
+ - `Java setup` Download the JDK 15 from this [link](https://www.oracle.com/java/technologies/javase-jdk15-downloads.html).
+    - Follow steps from this [link](https://www3.ntu.edu.sg/home/ehchua/programming/howto/JDK_Howto.html) based on your OS.
+ - Download the project from Git and save it to directory `<say, your-directory>`.
+ 
+#### Run
+- Then within terminal reach `<your-directory>\Vehicle_Parking_System\Parking_System\src\main\java\`
+ - Compile the code using `javac -cp . parking/Main.java`
+ - Run `java parking\Main.java`. 
+    - Specify the input FilePath: Default is `<Your-directory>\Vehicle_Parking_System\Parking_System\src\main\resources\input.txt`.
+
+#### Testcase
+- From terminal reach till `<your-directory>\Vehicle_Parking_System\Parking_System\`
+- Install Maven using `mvn install` if not present:
+   - [Download](http://maven.apache.org/download.cgi)  the Binary zip archive
+   - Install Maven using [these steps](https://www.javatpoint.com/how-to-install-maven).
+ - Run Testcases through `mvn clean test -Dtest=parking.controller.ParkingLotControllerTest`
+
+
 ### Classes & Objects
  - `Vehicle:` Registration ID & Driver's age.
  - `Slot:` Slot Number & Parked vehicle object.
