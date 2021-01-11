@@ -1,6 +1,7 @@
 # Vehicle Parking System -
 
 
+You can check the detailed expalination video on how to test the project through [this link](https://drive.google.com/file/d/14ASxmwuigE1d9QDap5oQMygvVi3x6baL/view?usp=sharing).
 
 ### System Requirements and Project Setup:
  - Based on your OS, download & install the *Intellij* from [here](https://www.jetbrains.com/idea/download/#section=windows)
