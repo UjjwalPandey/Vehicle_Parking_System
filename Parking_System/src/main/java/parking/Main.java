@@ -10,7 +10,9 @@ public class Main {
     public static void main(String[] args) {
         ParkingLotController parkingLotController = new ParkingLotController();
         try {
-            File myObj = new File("Parking_System/src/main/resources/input.txt");
+            System.out.println("Please specify the file input path: ");
+            Scanner inputPath = new Scanner(System.in);
+            File myObj = new File(inputPath.nextLine());
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String inputCommand = myReader.nextLine().trim();
